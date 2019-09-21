@@ -1,0 +1,35 @@
+%Lab 5, Create Code and Plot Figure 
+
+clear all
+
+filename = 'A22K-2_2016-06-01_2018-09-01_daily.csv';
+
+delimiterIn = ',';
+headerlinesIn = 17;
+A = importdata(filename,delimiterIn,headerlinesIn);
+
+temperature = A.data;
+S = mean(temperature);
+date_str = A.textdata(18:end,1);
+date = datenum(date_str);
+depths = str2double(A.textdata(17,2:end));
+
+%repmat(S(4), length(date), 1)
+
+k=4;
+hold on; 
+plot(date, temperature(:,k))
+plot(date,  repmat(S(4), length(date), 1)); 
+datetick 
+xlabel('2017 - 2018') 
+ylabel('Temperature (C)') 
+title(['Utqiagvik [A-22 Lat:71.0033 Lon:-154.9742]: MAGT = -5.4232  Depth = ',num2str(depths(k)),' m'])
+
+%A22K Site Information
+%Lat:71.0033 Lon:-154.9742 Elevation: 2.09 m
+%Installation Date: 8/19/17. Vegtation Type: Moss, Lichen, Grass - Tundra. 
+%Terrain: Slight evelivation ridge on flat lake-dotted coastal plain. Slope: Flat. 
+%Soil Type: Frozen organic material silt sand and possible fine gravel at depth. 
+%Field Notes: Site on slight evlevated ridge (likely an ancient shoreline). Line of sight clear all directions. Fair drainage and fair footing. 
+%National Preloeum Reserve - Alaska. Landmark: Sinclair Lake; Access: Helicopter; Nearest Hub: Barrow 39 nm; 
+%Land Owner/Manager: BLM
